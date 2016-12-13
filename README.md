@@ -17,6 +17,8 @@ js与css都用gulp md5化文件名
 1. run `npm install`
 2. run `bower install`
 3. run `gulp bower` (可省略)
+
    若自己添加了插件，可用gulp bower 将链接添加到index.html里面
 4. run `gulp serve --env=prod`
+
    参数可以为dev(开发),test(测试),prod(生产)
