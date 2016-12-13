@@ -1,0 +1,17 @@
+{
+  "name": "op-app",
+  "description": "op",
+  "authors": [
+    "wws <wuweisen@73go.cn>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.5.9",
+    "angular-animate": "~1.5.9",
+    "angular-resource": "~1.5.9",
+    "underscore": "~1.8.3",
+    "oclazyload": "~1.0.9",
+    "angular-ui-router": "~0.2.15",
+    "ng-dialog": "~0.6.4"
+  }
+}
