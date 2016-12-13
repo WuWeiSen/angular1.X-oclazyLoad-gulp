@@ -9,6 +9,8 @@
 一些资源直接用cdn链接,减少服务器压力（哪些采用cdn需要自行判断）
 
 js与css都用gulp md5化文件名
+
+现在逐步开发ing
 ## Getting Started
 
 1. run `npm install`
