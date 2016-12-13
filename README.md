@@ -11,7 +11,6 @@
 
 js与css都用gulp md5化文件名
 
-现在逐步开发ing
 ## Getting Started
 
 1. run `npm install`

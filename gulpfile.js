@@ -11,6 +11,12 @@ var sass = require('gulp-ruby-sass');
 
 var buildEnv = args.env || args.buildEnv || 'dev';
 
+var sassCompilerConfig = {
+    sourcemap: false,
+    style: 'expanded',
+    compass: true,
+    lineNumbers: true
+};
 
 gulp.task('bower', () => {
     return gulp.src('./app/index.html')
@@ -21,11 +27,11 @@ gulp.task('bower', () => {
 });
 
 gulp.task('serve', () => {
-    runSequence('changEnv', 'start:client');
+    runSequence('changEnv', 'start:client', 'watch');
 });
 
 gulp.task('start:client', ['start:proxy'], () => {
-    open('http://localhost:9103');
+    return open('http://localhost:9103');
 })
 
 gulp.task('start:proxy', function() {
@@ -56,4 +62,15 @@ gulp.task('changEnv', function() {
     gulp.src('./config/' + buildEnv + '.js')
         .pipe($.rename('env.js'))
         .pipe(gulp.dest('app/scripts'));
+});
+
+gulp.task('watch', () => {
+    gulp.watch('app/scss/**/*.scss', () => {
+        return sass('app/scss/**/*.scss', sassCompilerConfig)
+            .on('error', sass.logError)
+            .pipe(gulp.dest('./app/css'))
+            .pipe($.connect.reload());
+    });
+    $.watch(['app/scripts/**/*.html', 'app/index.html', 'app/scripts/**/*.js'])
+        .pipe($.connect.reload());
 });

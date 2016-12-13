@@ -4,8 +4,9 @@
         'ngAnimate',
         'ngResource',
         'ngDialog',
+        'oc.lazyLoad',
         'ui.router',
-    ]).run(function($rootScope, $state, $stateParams) {
+    ]).run(function($rootScope, $state, $stateParams, ngDialog) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.$on('$stateChangeSuccess', function() {
@@ -14,14 +15,18 @@
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             ngDialog.close();
         });
-    }).config(['ngDialogProvider', function(ngDialogProvider) {
+    }).config(['$urlRouterProvider', '$locationProvider',
+      function($urlRouterProvider, $locationProvider) {
+        $urlRouterProvider.otherwise('/export_image');
+        $locationProvider.html5Mode(true);
+      }
+    ]).config(['ngDialogProvider', function(ngDialogProvider) {
         ngDialogProvider.setDefaults({
             closeByDocument: false
         });
     }]).config(function($httpProvider) {
         $httpProvider.interceptors.push('CustomHTTPInterceptor');
     }).factory('FULL_API_URL', function(API_HOST) {
-        console.log(API_HOST)
         var BASE_URL = '/web/';
         return function(suffixUrl) {
             return API_HOST + BASE_URL + suffixUrl;

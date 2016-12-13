@@ -8,6 +8,19 @@
     <title>OP</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <base href="/">
+    <style>
+    .loading-mask {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        z-index: 999;
+        top: 0;
+        text-align: center;
+        padding-top: 26%;
+        background-color: #fff;
+    }
+    </style>
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
@@ -15,7 +28,11 @@
 </head>
 
 <body>
-    <div ng-view></div>
+    我是首页
+    <div ui-view></div>
+   <!--  <div class="loading-mask">
+        <img src="./images/loding.gif" alt="">
+    </div> -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -26,6 +43,7 @@
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
     <!-- endbower -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/ocLazyLoad.config.js"></script>
     <script src="scripts/router.js"></script>
     <script src="scripts/env.js"></script>
     <script src="scripts/constant.js"></script>
