@@ -7,8 +7,9 @@
                 modules: [{
                     name: 'exportImage',
                     files: [
-                        './css/export_image/exportImage.css',
-                        './scripts/modules/export_image/exportImageCtrl.js'
+                        './css/exportImage/exportImage.css',
+                        './scripts/modules/exportImage/exportImageCtrl.js',
+                        './scripts/modules/exportImage/exportImageStore.js'
                     ]
                 }]
             });

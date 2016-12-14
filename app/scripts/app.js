@@ -17,7 +17,7 @@
         });
     }).config(['$urlRouterProvider', '$locationProvider',
       function($urlRouterProvider, $locationProvider) {
-        $urlRouterProvider.otherwise('/export_image');
+        $urlRouterProvider.otherwise('/exportImage');
         $locationProvider.html5Mode(true);
       }
     ]).config(['ngDialogProvider', function(ngDialogProvider) {

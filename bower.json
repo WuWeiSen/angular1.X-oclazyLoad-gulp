@@ -12,6 +12,8 @@
     "underscore": "~1.8.3",
     "oclazyload": "~1.0.9",
     "angular-ui-router": "~0.2.15",
-    "ng-dialog": "~0.6.4"
+    "ng-dialog": "~0.6.4",
+    "bootstrap": "^3.3.7",
+    "angular-bootstrap": "^2.3.1"
   }
 }

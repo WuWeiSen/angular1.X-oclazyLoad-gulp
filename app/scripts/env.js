@@ -1,7 +1,7 @@
 (function(window, angular) {
 
     angular.module('opApp')
-        .constant('APP_ENV', 'prod')
-        .constant('API_HOST', '/api/v1');
+        .constant('APP_ENV', 'dev')
+        .constant('API_HOST', '/mockapi');
 
 })(window, window.angular);

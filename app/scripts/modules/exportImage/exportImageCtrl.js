@@ -1,7 +1,7 @@
 (function(app, ng) {
     app.controller('ExportImageController', function($scope) {
         var vm = $scope.vm = {
-            name: 'export_image'
+            name: 'exportImage'
         };
     });
 })(angular.module('opApp'), angular);

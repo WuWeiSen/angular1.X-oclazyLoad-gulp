@@ -4,8 +4,8 @@
             var lazyDeferred = null;
             $stateProvider
                 .state('exportImage', {
-                    url: '/export_image',
-                    templateUrl: './scripts/modules/export_image/exportImage.html',
+                    url: '/exportImage',
+                    templateUrl: './scripts/modules/exportImage/exportImage.html',
                     data: {
                         title: '图片导入'
                     },

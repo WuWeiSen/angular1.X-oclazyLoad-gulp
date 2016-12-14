@@ -3,17 +3,12 @@
 ## 文件夹命名
 
 ```
-// Good
-easy_note
-
-// Bad
 easyNote
-easy-node
 ```
 
 ## JavaScript 代码规范
 
-以[社区规范](https://github.com/airbnb/javascript/tree/master/es5)为标准。
+以[社区规范](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)为标准。
 
 ## CSS 、html、SASS命名，以及书写规则
 以http://qfang-frontend.github.io/code-guide/#css-declaration-order 为标准

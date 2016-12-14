@@ -21,7 +21,15 @@ var sassCompilerConfig = {
 gulp.task('bower', () => {
     return gulp.src('./app/index.html')
         .pipe(wiredep({
-            directory: './app/bower_components'
+            directory: './app/bower_components',
+            overrides: {
+                'bootstrap': {
+                    'main': [
+                        'dist/css/bootstrap.css',
+                        'dist/js/bootstrap.js'
+                    ]
+                }
+            }
         }))
         .pipe(gulp.dest('./app'));
 });
