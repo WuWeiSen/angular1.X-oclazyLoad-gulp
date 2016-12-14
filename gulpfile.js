@@ -28,6 +28,13 @@ gulp.task('bower', () => {
                         'dist/css/bootstrap.css',
                         'dist/js/bootstrap.js'
                     ]
+                },
+                'amazeui': {
+                    'main': [
+                        'dist/css/amazeui.css',
+                        'dist/js/amazeui.js',
+                        'dist/js/amazeui.ie8polyfill.js'
+                    ]
                 }
             }
         }))
@@ -73,7 +80,7 @@ gulp.task('changEnv', function() {
 });
 
 gulp.task('watch', () => {
-    gulp.watch('app/scss/**/*.scss', () => {
+    gulp.watch(['app/scss/**/*.scss','app/scss/*.scss'], () => {
         return sass('app/scss/**/*.scss', sassCompilerConfig)
             .on('error', sass.logError)
             .pipe(gulp.dest('./app/css'))

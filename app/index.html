@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>OP</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>差旅报销系统</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <base href="/">
     <style>
@@ -25,13 +27,86 @@
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/amazeui/dist/css/amazeui.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="css/common.css" />
 </head>
 
 <body>
-    我是首页
-    <div ui-view></div>
-   <!--  <div class="loading-mask">
+    <header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <strong>报销系统</strong>
+        </div>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+                <li class="am-dropdown" data-am-dropdown>
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                        <span class="am-icon-users"></span> 吴伟森 <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li><a href="#"><span class="am-icon-sign-out"></span> 退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="am-cf admin-main">
+        <!-- sidebar start -->
+        <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+            <div class="am-offcanvas-bar admin-offcanvas-bar">
+                <ul class="am-list admin-sidebar-list">
+                    <li class="admin-parent">
+                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav-bill'}"><span class="am-icon-tasks"></span> 票据管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-bill">
+                            <li>
+                                <a href="admin-help.html">
+                                    收件管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin-user.html" class="am-cf">
+                                    图片导入
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin-help.html">
+                                    票据录入
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="am-icon-bar-chart"></span> 报表管理</a></li>
+                    <li class="admin-parent">
+                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav-set'}"><span class="am-icon-file"></span> 系统设置 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-set">
+                            <li>
+                                <a href="admin-user.html" class="am-cf">
+                                    OP设置
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="am-icon-sign-out"></span> 退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- sidebar end -->
+        <!-- content start -->
+        <div class="admin-content">
+            <div class="admin-content-body">
+                <div class="am-cf am-padding" ui-view>
+      </div>
+            </div>
+            <footer class="admin-content-footer">
+                <hr>
+                <p class="am-padding-left">Copyright ©2016 73go.cn 版权所有 深圳市轻松行科技有限公司</p>
+            </footer>
+        </div>
+        <!-- content end -->
+    </div>
+    <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+    <!--  <div class="loading-mask">
         <img src="./images/loding.gif" alt="">
     </div> -->
     <!-- bower:js -->
@@ -45,6 +120,9 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/handlebars/handlebars.js"></script>
+    <script src="bower_components/amazeui/dist/js/amazeui.js"></script>
+    <script src="bower_components/amazeui/dist/js/amazeui.ie8polyfill.js"></script>
     <!-- endbower -->
     <script src="scripts/app.js"></script>
     <script src="scripts/ocLazyLoad.config.js"></script>

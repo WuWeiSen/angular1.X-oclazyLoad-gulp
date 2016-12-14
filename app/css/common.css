@@ -1,0 +1,435 @@
+@charset "UTF-8";
+/**
+ * common.scss
+ * 杩欓噷鏀句竴浜涘叕鐢ㄧ殑
+ */
+/*
+ fixed-layout 鍥哄畾澶撮儴鍜岃竟鏍忓竷灞€
+*/
+/* line 11, app/scss/common.scss */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 17, app/scss/common.scss */
+ul {
+  margin-top: 0;
+}
+
+/* line 21, app/scss/common.scss */
+.admin-icon-yellow {
+  color: #ffbe40;
+}
+
+/* line 25, app/scss/common.scss */
+.admin-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1500;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+/* line 35, app/scss/common.scss */
+.admin-header-list a:hover :after {
+  content: none;
+}
+
+/* line 39, app/scss/common.scss */
+.admin-main {
+  position: relative;
+  height: 100%;
+  padding-top: 51px;
+  background: #f3f3f3;
+}
+
+/* line 46, app/scss/common.scss */
+.admin-menu {
+  position: fixed;
+  z-index: 10;
+  bottom: 30px;
+  right: 20px;
+}
+
+/* line 53, app/scss/common.scss */
+.admin-sidebar {
+  width: 260px;
+  min-height: 100%;
+  float: left;
+  border-right: 1px solid #cecece;
+}
+
+/* line 60, app/scss/common.scss */
+.admin-sidebar.am-active {
+  z-index: 1600;
+}
+
+/* line 64, app/scss/common.scss */
+.admin-sidebar-list {
+  margin-bottom: 0;
+}
+
+/* line 68, app/scss/common.scss */
+.admin-sidebar-list li a {
+  color: #5c5c5c;
+  padding-left: 24px;
+}
+
+/* line 73, app/scss/common.scss */
+.admin-sidebar-list li:first-child {
+  border-top: none;
+}
+
+/* line 77, app/scss/common.scss */
+.admin-sidebar-sub {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 0 16px 8px -15px #e2e2e2 inset;
+  background: #ececec;
+  padding-left: 24px;
+}
+
+/* line 85, app/scss/common.scss */
+.admin-sidebar-sub li:first-child {
+  border-top: 1px solid #dedede;
+}
+
+/* line 89, app/scss/common.scss */
+.admin-sidebar-panel {
+  margin: 10px;
+}
+
+/* line 93, app/scss/common.scss */
+.admin-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background: #fff;
+}
+
+/* line 106, app/scss/common.scss */
+.admin-content,
+.admin-sidebar {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* line 114, app/scss/common.scss */
+.admin-content-body {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+/* line 121, app/scss/common.scss */
+.admin-content-footer {
+  font-size: 85%;
+  color: #777;
+}
+
+/* line 126, app/scss/common.scss */
+.admin-content-list {
+  border: 1px solid #e9ecf1;
+  margin-top: 0;
+}
+
+/* line 131, app/scss/common.scss */
+.admin-content-list li {
+  border: 1px solid #e9ecf1;
+  border-width: 0 1px;
+  margin-left: -1px;
+}
+
+/* line 137, app/scss/common.scss */
+.admin-content-list li:first-child {
+  border-left: none;
+}
+
+/* line 141, app/scss/common.scss */
+.admin-content-list li:last-child {
+  border-right: none;
+}
+
+/* line 145, app/scss/common.scss */
+.admin-content-table a {
+  color: #535353;
+}
+
+/* line 148, app/scss/common.scss */
+.admin-content-file {
+  margin-bottom: 0;
+  color: #666;
+}
+
+/* line 153, app/scss/common.scss */
+.admin-content-file p {
+  margin: 0 0 5px 0;
+  font-size: 1.4rem;
+}
+
+/* line 158, app/scss/common.scss */
+.admin-content-file li {
+  padding: 10px 0;
+}
+
+/* line 162, app/scss/common.scss */
+.admin-content-file li:first-child {
+  border-top: none;
+}
+
+/* line 166, app/scss/common.scss */
+.admin-content-file li:last-child {
+  border-bottom: none;
+}
+
+/* line 170, app/scss/common.scss */
+.admin-content-file li .am-progress {
+  margin-bottom: 4px;
+}
+
+/* line 174, app/scss/common.scss */
+.admin-content-file li .am-progress-bar {
+  line-height: 14px;
+}
+
+/* line 178, app/scss/common.scss */
+.admin-content-task {
+  margin-bottom: 0;
+}
+
+/* line 182, app/scss/common.scss */
+.admin-content-task li {
+  padding: 5px 0;
+  border-color: #eee;
+}
+
+/* line 187, app/scss/common.scss */
+.admin-content-task li:first-child {
+  border-top: none;
+}
+
+/* line 191, app/scss/common.scss */
+.admin-content-task li:last-child {
+  border-bottom: none;
+}
+
+/* line 195, app/scss/common.scss */
+.admin-task-meta {
+  font-size: 1.2rem;
+  color: #999;
+}
+
+/* line 200, app/scss/common.scss */
+.admin-task-bd {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+/* line 205, app/scss/common.scss */
+.admin-content-comment {
+  margin-bottom: 0;
+}
+
+/* line 209, app/scss/common.scss */
+.admin-content-comment .am-comment-bd {
+  font-size: 1.4rem;
+}
+
+/* line 213, app/scss/common.scss */
+.admin-content-pagination {
+  margin-bottom: 0;
+}
+
+/* line 216, app/scss/common.scss */
+.admin-content-pagination li a {
+  padding: 4px 8px;
+}
+
+@media only screen and (min-width: 641px) {
+  /* line 221, app/scss/common.scss */
+  .admin-sidebar {
+    display: block;
+    position: static;
+    background: none;
+  }
+
+  /* line 227, app/scss/common.scss */
+  .admin-offcanvas-bar {
+    position: static;
+    width: auto;
+    background: none;
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    overflow-y: visible;
+    min-height: 100%;
+  }
+
+  /* line 237, app/scss/common.scss */
+  .admin-offcanvas-bar:after {
+    content: none;
+  }
+}
+@media only screen and (max-width: 640px) {
+  /* line 243, app/scss/common.scss */
+  .admin-sidebar {
+    width: inherit;
+  }
+
+  /* line 247, app/scss/common.scss */
+  .admin-offcanvas-bar {
+    background: #f3f3f3;
+  }
+
+  /* line 251, app/scss/common.scss */
+  .admin-offcanvas-bar:after {
+    background: #BABABA;
+  }
+
+  /* line 255, app/scss/common.scss */
+  .admin-sidebar-list a:hover, .admin-sidebar-list a:active {
+    -webkit-transition: background-color .3s ease;
+    -moz-transition: background-color .3s ease;
+    -ms-transition: background-color .3s ease;
+    -o-transition: background-color .3s ease;
+    transition: background-color .3s ease;
+    background: #E4E4E4;
+  }
+
+  /* line 264, app/scss/common.scss */
+  .admin-content-list li {
+    padding: 10px;
+    border-width: 1px 0;
+    margin-top: -1px;
+  }
+
+  /* line 270, app/scss/common.scss */
+  .admin-content-list li:first-child {
+    border-top: none;
+  }
+
+  /* line 274, app/scss/common.scss */
+  .admin-content-list li:last-child {
+    border-bottom: none;
+  }
+
+  /* line 278, app/scss/common.scss */
+  .admin-form-text {
+    text-align: left !important;
+  }
+}
+/*
+* user.html css
+*/
+/* line 287, app/scss/common.scss */
+.user-info {
+  margin-bottom: 15px;
+}
+
+/* line 291, app/scss/common.scss */
+.user-info .am-progress {
+  margin-bottom: 4px;
+}
+
+/* line 295, app/scss/common.scss */
+.user-info p {
+  margin: 5px;
+}
+
+/* line 299, app/scss/common.scss */
+.user-info-order {
+  font-size: 1.4rem;
+}
+
+/*
+* errorLog.html css
+*/
+/* line 307, app/scss/common.scss */
+.error-log .am-pre-scrollable {
+  max-height: 40rem;
+}
+
+/*
+* table.html css
+*/
+/* line 315, app/scss/common.scss */
+.table-main {
+  font-size: 1.4rem;
+  padding: .5rem;
+}
+
+/* line 320, app/scss/common.scss */
+.table-main button {
+  background: #fff;
+}
+
+/* line 324, app/scss/common.scss */
+.table-check {
+  width: 30px;
+}
+
+/* line 328, app/scss/common.scss */
+.table-id {
+  width: 50px;
+}
+
+@media only screen and (max-width: 640px) {
+  /* line 333, app/scss/common.scss */
+  .table-select {
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+}
+/*
+gallery.html css
+*/
+/* line 343, app/scss/common.scss */
+.gallery-list li {
+  padding: 10px;
+}
+
+/* line 347, app/scss/common.scss */
+.gallery-list a {
+  color: #666;
+}
+
+/* line 351, app/scss/common.scss */
+.gallery-list a:hover {
+  color: #3bb4f2;
+}
+
+/* line 355, app/scss/common.scss */
+.gallery-title {
+  margin-top: 6px;
+  font-size: 1.4rem;
+}
+
+/* line 360, app/scss/common.scss */
+.gallery-desc {
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+/*
+ 404.html css
+*/
+/* line 369, app/scss/common.scss */
+.page-404 {
+  background: #fff;
+  border: none;
+  width: 200px;
+  margin: 0 auto;
+}
