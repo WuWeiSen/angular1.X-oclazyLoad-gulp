@@ -1,3 +1,100 @@
 <div class="export-image" ng-controller="ExportImageController">
-我是{{vm.name}}页
+    <form class="am-form-inline" role="form" ng-submit="methods.getExportImageList(true)" novalidate>
+        <!--      <div class="am-form-group am-margin-left-xs mb5">
+            <span>园区：</span>
+            <select class="select-input" ng-model="vm.listParameter.zoneNum" ng-options="item.zoneNum as item.zoneName for item in vm.zoneList">
+            </select>
+        </div> -->
+        <div class="am-form-group am-margin-left-xs">
+            <span>企业：</span>
+            <input type="text" class="am-form-field" ng-model="vm.listParameter.companyName" placeholder="支持模糊搜索">
+        </div>
+        <div class="am-form-group am-margin-left-xs">
+            <span>申请人：</span>
+            <input type="text" class="am-form-field w120" ng-model="vm.listParameter.applicationName" placeholder="支持模糊搜索">
+        </div>
+        <div class="am-form-group am-margin-left-xs child-div-inline-block">
+            <span>申请日期：</span>
+            <input type="text" class="am-form-field w120 " uib-datepicker-popup="yyyy/MM/dd" ng-model="vm.listParameter.startTime" is-open="startTime.opened" datepicker-options="{maxDate: vm.listParameter.endTime}" ng-click="startTime.opened = true" /> -
+            <input class="am-form-field w120 " type="text" uib-datepicker-popup="yyyy/MM/dd" ng-model="vm.listParameter.endTime" is-open="endTime.opened" datepicker-options="{minDate: vm.listParameter.startTime}" ng-click="endTime.opened = true" />
+        </div>
+        <div class="am-form-group am-margin-left-xs">
+            <span>单号：</span>
+            <input type="text" class="am-form-field" ng-model="vm.listParameter.reimNum" placeholder="精确单号，支持回车">
+        </div>
+        <button type="submit" class="am-btn am-margin-horizontal-xs am-btn-primary am-radius">查询</button>
+    </form>
+    <hr/>
+    <table class="am-table am-table-bordered export-image-table">
+        <thead>
+            <tr>
+                <th class="am-text-center">序号</th>
+                <th class="am-text-center">报销单号</th>
+                <th class="am-text-center">报销人</th>
+                <th class="am-text-center">金额</th>
+                <th class="am-text-center">企业</th>
+                <th class="am-text-center">事由</th>
+                <th class="am-text-center">状态</th>
+                <th class="am-text-center">操作</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="bill in vm.billList track by $index" ng-if="vm.listTotal > 0">
+            <tr>
+                <td class="am-text-center">{{$index + 1 + (vm.listParameter.pageIndex-1)*(vm.listParameter.pageSize)}}</td>
+                <td>{{ bill.reimNum }}</td>
+                <td>{{ bill.applicationName }}</td>
+                <td class="am-text-right">￥{{ bill.reimTotal | price }}</td>
+                <td class="am-text-truncate">{{ bill.companyName }}</td>
+                <td>{{ bill.describe }}</td>
+                <td>{{ bill.status }}</td>
+                <td class="am-text-primary pointer" ng-click="methods.showBillDetail(bill)">票据详情</td>
+            </tr>
+            <tr class="bill-detail am-animation-slide-bottom" ng-if="bill.showDetail">
+                <td></td>
+                <td colspan="7">
+                    <div ng-repeat="item in bill.billDetailItem track by $index" class="bill-detail-item">
+                        <div class="min-h38 bill-detail-table">
+                            <div class="bill-detail-table-cell">
+                                <span class="am-text-default am-badge am-badge-secondary  am-round">{{$index + 1}}</span>
+                            </div>
+                            <span class="bill-detail-table-cell">{{item.iTime | date: 'yyyy-MM-dd'}}<span class="am-margin-horizontal-xs">{{item.weekDay}}</span></span>
+                            <span class="bill-detail-table-cell">{{item.type}}</span>
+                            <span class="bill-detail-table-cell">{{item.payForType}}</span>
+                            <span class="description bill-detail-table-cell">{{item.describe}}</span>
+                            <span class="am-text-xl am-text-right bill-detail-table-cell">￥{{ item.total | price}}</span>
+                        </div>
+                        <hr/>
+                        <div>
+                            <div class="am-inline-block bill-detail-img-panel">
+                                <span class="btn-prev" title="向左滑动" ng-click="methods.scrollTheTrips('left', 'bill-detail-img-ul', $index+1)"><</span>
+                                <ul class="list-inline bill-detail-img-ul bill-detail-img-ul-{{$index+1}}">
+                                    <li ng-repeat="img in item.imageUrl track by $index" ng-click="methods.changeImg(bill, item, img.imageUrl)">
+                                        <img class="img" ng-src="{{img.imageUrl}}?x-oss-process=image/resize,h_140,w_200">
+                                        <span class="am-badge am-badge-success img-counter">{{$index+1}}/{{item.imageUrl.length}}</span>
+                                        <span class="am-icon-sm am-icon-times-circle img-status" ng-click="methods.deleteImage($event,img, item)"></span>
+                                    </li>
+                                </ul>
+                                <span class="btn-next" title="向右滑动" ng-click="methods.scrollTheTrips('right', 'bill-detail-img-ul', $index+1)">> </span>
+                            </div>
+                            <label for="fileUpLoad-{{$index+1}}" class="am-btn am-btn-default btn-add-img am-fr">
+                                <i class="am-icon-plus am-margin-right-xs"></i>添加
+                            </label>
+                            <input type="file" multiple class="hidden" id="fileUpLoad-{{$index+1}}" nv-file-select uploader="methods.uploaderImage(item, $index+1)" />
+                            <div>
+                                <image-viewer ng-if="item.showImgView" ng-model="vm.currentImg">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody ng-if="vm.listTotal <= 0">
+            <tr>
+                <td colspan="8" class="no-data-panel">暂无数据</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="am-text-center" ng-if="vm.listTotal > 0">
+        <ul uib-pagination total-items="vm.listTotal" ng-change="methods.getExportImageList()" ng-model="vm.listParameter.pageIndex" items-per-page="vm.listParameter.pageSize" class="pagination-sm"></ul>
+    </div>
 </div>

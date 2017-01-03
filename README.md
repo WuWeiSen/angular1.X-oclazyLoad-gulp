@@ -21,3 +21,5 @@ js与css都用gulp md5化文件名
 4. run `gulp serve --env=prod`
 
    参数可以为dev(开发),test(测试),prod(生产)
+
+5.angular 1.5.10 版本

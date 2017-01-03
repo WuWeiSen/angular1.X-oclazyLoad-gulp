@@ -7,7 +7,7 @@
                 modules: [{
                     name: 'exportImage',
                     files: [
-                        './css/exportImage/exportImage.css',
+                        './css/billManagement/exportImage.css',
                         './scripts/modules/exportImage/exportImageCtrl.js',
                         './scripts/modules/exportImage/exportImageStore.js'
                     ]

@@ -2,37 +2,38 @@
 <html ng-app="opApp">
 
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>差旅报销系统</title>
+    <title>报销系统</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <base href="/">
     <style>
     .loading-mask {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        z-index: 999;
-        top: 0;
         text-align: center;
-        padding-top: 26%;
+        padding-top: 18%;
         background-color: #fff;
     }
     </style>
+    <!-- build:css css/combined.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/amazeui/dist/css/amazeui.css" />
+    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="css/common.css" />
+    <!-- endbuild -->
 </head>
 
-<body>
+<body ng-controller="IndexController">
     <header class="am-topbar am-topbar-inverse admin-header">
         <div class="am-topbar-brand">
             <strong>报销系统</strong>
@@ -42,10 +43,10 @@
             <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
                 <li class="am-dropdown" data-am-dropdown>
                     <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-                        <span class="am-icon-users"></span> 吴伟森 <span class="am-icon-caret-down"></span>
+                        <span class="am-icon-users"></span><span class="am-margin-horizontal-xs" ng-bind="vm.user.uesrName"></span><span class="am-icon-caret-down"></span>
                     </a>
                     <ul class="am-dropdown-content">
-                        <li><a href="#"><span class="am-icon-sign-out"></span> 退出</a></li>
+                        <li ng-click="methods.applyLogout()"><a href="javascript:void(0)"><span class="am-icon-sign-out"></span> 退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -57,37 +58,16 @@
             <div class="am-offcanvas-bar admin-offcanvas-bar">
                 <ul class="am-list admin-sidebar-list">
                     <li class="admin-parent">
-                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav-bill'}"><span class="am-icon-tasks"></span> 票据管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav-bill'}"><span class="am-icon-tasks"></span> 报销票据管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                         <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-bill">
                             <li>
-                                <a href="admin-help.html">
-                                    收件管理
-                                </a>
-                            </li>
-                            <li>
-                                <a href="admin-user.html" class="am-cf">
+                                <a ui-sref="exportImage">
                                     图片导入
                                 </a>
                             </li>
-                            <li>
-                                <a href="admin-help.html">
-                                    票据录入
-                                </a>
-                            </li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="am-icon-bar-chart"></span> 报表管理</a></li>
-                    <li class="admin-parent">
-                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav-set'}"><span class="am-icon-file"></span> 系统设置 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-set">
-                            <li>
-                                <a href="admin-user.html" class="am-cf">
-                                    OP设置
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="am-icon-sign-out"></span> 退出</a></li>
+                    <li><a href="javascript:void(0)" ng-click="methods.applyLogout()"><span class="am-icon-sign-out"></span> 退出</a></li>
                 </ul>
             </div>
         </div>
@@ -96,40 +76,58 @@
         <div class="admin-content">
             <div class="admin-content-body">
                 <div class="am-cf am-padding" ui-view>
-      </div>
+                    <div class="loading-mask">
+                        <img src="./images/loding.gif" alt="">
+                    </div>
+                </div>
             </div>
             <footer class="admin-content-footer">
                 <hr>
-                <p class="am-padding-left">Copyright ©2016 73go.cn 版权所有 深圳市轻松行科技有限公司</p>
+                <p class="am-padding-left">Copyright ©2016</p>
             </footer>
         </div>
         <!-- content end -->
     </div>
     <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
-    <!--  <div class="loading-mask">
-        <img src="./images/loding.gif" alt="">
-    </div> -->
+    <!-- build:js scripts/depend.js -->
     <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
     <script src="bower_components/handlebars/handlebars.js"></script>
     <script src="bower_components/amazeui/dist/js/amazeui.js"></script>
     <script src="bower_components/amazeui/dist/js/amazeui.ie8polyfill.js"></script>
+    <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
     <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/ocLazyLoad.config.js"></script>
     <script src="scripts/router.js"></script>
     <script src="scripts/env.js"></script>
     <script src="scripts/constant.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="scripts/main.js"></script>
+    <!--  services start -->
+    <script src="scripts/services/transDateTime.js"></script>
     <script src="scripts/services/customHTTPInterceptor.js"></script>
+    <script src="scripts/services/angular-locale_zh-cn.js"></script>
+    <script src="scripts/services/image-viewer.js"></script>
+    <!--  services end -->
+    <!--  filters start -->
+    <script src="scripts/filters/price.js"></script>
+    <!--  filters end -->
+    <!-- endbuild -->
+    <!--  js start -->
+    <script src="js/expr-eval.js"></script>
+    <!--  js end -->
 </body>
 
 </html>

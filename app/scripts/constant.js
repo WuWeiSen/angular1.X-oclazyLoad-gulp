@@ -1,5 +1,5 @@
 (function(window, angular) {
-    // 状态码
+    // 请求返回状态码
     var restStatus = {
         'success': '200',
         'unauthorized': '99999',

@@ -26,8 +26,8 @@
                             config.url = config.url + '?t=' + (new Date()).getTime();
                         }
                     }
-                    if (!!config.params && config.params.hasOwnProperty('start') && config.params.hasOwnProperty('limit')) {
-                        config.params.start = config.params.start > 0 ? config.params.start : 1;
+                    if (!!config.params && config.params.hasOwnProperty('pageIndex') && config.params.hasOwnProperty('pageSize')) {
+                        config.params.pageIndex = config.params.pageIndex > 0 ? config.params.pageIndex : 1;
                     }
                     config.headers['Within'] = 'XHR';
                     return config || $q.when(config);
