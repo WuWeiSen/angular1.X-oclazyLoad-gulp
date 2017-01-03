@@ -72,7 +72,6 @@ gulp.task('start:proxy', function() {
                 return proxy(options);
             }
             middlewares.push(createProxy('/devapi', ''));   // 设置各种api代理
-            middlewares.push(createProxy('/web', ''));
             middlewares.push(createProxy('/testapi', ''));
             middlewares.push(createProxy('/api', ''));
             middlewares.push(createProxy('/imgapi', ''));
@@ -99,6 +98,33 @@ gulp.task('watch', () => {
         .pipe($.connect.reload());
 });
 
+// 访问打包后的代码
+gulp.task('serve:prod', ['build:proxy'], () => {
+    return open('http://localhost:9000');
+})
+
+gulp.task('build:proxy', function() {
+    return $.connect.server({
+        root: ['dist'],
+        port: 9000,
+        fallback: 'dist/index.html', 
+        livereload: true,
+        middleware: (connect, opts) => {
+            var middlewares = [];
+            var url = require('url');
+            var proxy = require('proxy-middleware');
+            var createProxy = (prefixString, proxyServer) => {
+                var options = url.parse(proxyServer);
+                options.route = prefixString;
+                return proxy(options);
+            }
+            // 设置各种api代理
+            middlewares.push(createProxy('/api', ''));  
+            middlewares.push(createProxy('/imgapi', ''));
+            return middlewares;
+        }
+    });
+});
 
 /*build*/
 var cssRoad = ['./app/css/**/*.css', '!./app/css/common.css'];
