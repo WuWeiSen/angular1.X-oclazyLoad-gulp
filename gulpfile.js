@@ -9,6 +9,7 @@ var args = require('get-gulp-args')();
 var open = require('open');
 var sass = require('gulp-ruby-sass');
 var revReplace = require('gulp-rev-replace');
+var replaceFilesContent = require('gulp-batch-replace'); // 用来替换文件内容
 
 
 var buildEnv = args.env || args.buildEnv || 'dev';
@@ -58,7 +59,7 @@ gulp.task('start:client', ['start:proxy'], () => {
 
 gulp.task('start:proxy', function() {
     return $.connect.server({
-        root: ['app'],  // 若想运行打包后的代码，请将这里的"app"改为"dist"
+        root: ['app'], // 若想运行打包后的代码，请将这里的"app"改为"dist"
         port: 9800,
         fallback: 'app/index.html', // 若想运行打包后的代码，请将这里的"app"改为"dist"
         livereload: true,
@@ -71,7 +72,7 @@ gulp.task('start:proxy', function() {
                 options.route = prefixString;
                 return proxy(options);
             }
-            middlewares.push(createProxy('/devapi', ''));   // 设置各种api代理
+            middlewares.push(createProxy('/devapi', '')); // 设置各种api代理
             middlewares.push(createProxy('/testapi', ''));
             middlewares.push(createProxy('/api', ''));
             middlewares.push(createProxy('/imgapi', ''));
@@ -107,19 +108,19 @@ gulp.task('build:proxy', function() {
     return $.connect.server({
         root: ['dist'],
         port: 9000,
-        fallback: 'dist/index.html', 
+        fallback: 'dist/index.html',
         livereload: true,
         middleware: (connect, opts) => {
             var middlewares = [];
             var url = require('url');
             var proxy = require('proxy-middleware');
             var createProxy = (prefixString, proxyServer) => {
-                var options = url.parse(proxyServer);
-                options.route = prefixString;
-                return proxy(options);
-            }
-            // 设置各种api代理
-            middlewares.push(createProxy('/api', ''));  
+                    var options = url.parse(proxyServer);
+                    options.route = prefixString;
+                    return proxy(options);
+                }
+                // 设置各种api代理
+            middlewares.push(createProxy('/api', ''));
             middlewares.push(createProxy('/imgapi', ''));
             return middlewares;
         }
@@ -134,12 +135,6 @@ gulp.task('buildSass', function() {
         .pipe(gulp.dest('./app/css'))
 });
 
-gulp.task('copyStyle', ['buildSass'], function() {
-    return gulp.src(cssRoad)
-        .pipe($.cssnano())
-        .pipe(gulp.dest('dist/css'))
-});
-
 
 gulp.task('copyJs', function() {
     return gulp.src('./app/js/*.js')
@@ -147,11 +142,30 @@ gulp.task('copyJs', function() {
         .pipe(gulp.dest('dist/js'))
 });
 
-gulp.task('copyModule', function() {
+// ocLazyLoad.config.js替换js
+gulp.task('revReplaceModule', ['revModuleJs', 'revModuleCss'], function() {
+    return gulp.src('./app/scripts/ocLazyLoad.config.js')
+        .pipe(revReplace({ manifest: gulp.src('./app/temp/**/rev-manifest.json') }))
+        .pipe(gulp.dest('app/temp'));
+});
+
+gulp.task('revModuleJs', function() {
     return gulp.src('./app/scripts/modules/**/*.js')
         .pipe($.ngAnnotate())
         .pipe($.uglify())
+        .pipe($.rev())
         .pipe(gulp.dest('dist/scripts/modules'))
+        .pipe($.rev.manifest())
+        .pipe(gulp.dest('app/temp/rev-js'));
+});
+
+gulp.task('revModuleCss', ['buildSass'], function() {
+    return gulp.src(cssRoad)
+        .pipe($.cssnano())
+        .pipe($.rev())
+        .pipe(gulp.dest('dist/css'))
+        .pipe($.rev.manifest())
+        .pipe(gulp.dest('app/temp/rev-css'));
 });
 
 gulp.task('copyHtml', function() {
@@ -177,8 +191,11 @@ gulp.task('copyFonts', function() {
 gulp.task('finalTask', function() {
     var jsFilter = $.filter('**/*.js', { restore: true });
     var cssFilter = $.filter('**/*.css', { restore: true });
-
+    var replaceThis = [
+        ['scripts/ocLazyLoad.config.js', 'temp/ocLazyLoad.config.js']
+    ];
     return gulp.src('app/index.html')
+        .pipe(replaceFilesContent(replaceThis))
         .pipe($.useref())
         .pipe(cssFilter)
         .pipe($.cssnano())
@@ -193,11 +210,16 @@ gulp.task('finalTask', function() {
         .pipe(gulp.dest('dist'))
 });
 
+gulp.task('cleanTemp', function() {
+    return gulp.src('./app/temp')
+        .pipe($.clean())
+});
+
 gulp.task('clean', function() {
     return gulp.src('./dist')
         .pipe($.clean())
 });
 
 gulp.task('build', ['clean'], function() {
-    runSequence('changEnv', 'copyStyle', 'copyJs','copyModule', 'copyHtml', 'copyOther', 'copyImage', 'copyFonts', 'finalTask');
+    runSequence('changEnv', 'copyJs', 'revReplaceModule', 'copyHtml', 'copyOther', 'copyImage', 'copyFonts', 'finalTask', 'cleanTemp');
 });
