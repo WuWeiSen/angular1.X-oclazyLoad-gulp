@@ -66,7 +66,7 @@
                         <hr/>
                         <div>
                             <div class="am-inline-block bill-detail-img-panel">
-                                <span class="btn-prev" title="向左滑动" ng-click="methods.scrollTheTrips('left', 'bill-detail-img-ul', $index+1)"><</span>
+                                <span class="btn-prev" title="向左滑动" ng-click="methods.scrollTheTrips('left', 'bill-detail-img-ul', $index+1)">&lt;</span>
                                 <ul class="list-inline bill-detail-img-ul bill-detail-img-ul-{{$index+1}}">
                                     <li ng-repeat="img in item.imageUrl track by $index" ng-click="methods.changeImg(bill, item, img.imageUrl)">
                                         <img class="img" ng-src="{{img.imageUrl}}?x-oss-process=image/resize,h_140,w_200">
@@ -74,7 +74,7 @@
                                         <span class="am-icon-sm am-icon-times-circle img-status" ng-click="methods.deleteImage($event,img, item)"></span>
                                     </li>
                                 </ul>
-                                <span class="btn-next" title="向右滑动" ng-click="methods.scrollTheTrips('right', 'bill-detail-img-ul', $index+1)">> </span>
+                                <span class="btn-next" title="向右滑动" ng-click="methods.scrollTheTrips('right', 'bill-detail-img-ul', $index+1)">&gt;</span>
                             </div>
                             <label for="fileUpLoad-{{$index+1}}" class="am-btn am-btn-default btn-add-img am-fr">
                                 <i class="am-icon-plus am-margin-right-xs"></i>添加

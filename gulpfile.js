@@ -8,6 +8,7 @@ var gulpif = require('gulp-if');
 var args = require('get-gulp-args')();
 var open = require('open');
 var sass = require('gulp-ruby-sass');
+var htmlmin = require('gulp-htmlmin');
 var revReplace = require('gulp-rev-replace');
 var replaceFilesContent = require('gulp-batch-replace'); // 用来替换文件内容
 
@@ -170,7 +171,8 @@ gulp.task('revModuleCss', ['buildSass'], function() {
 
 gulp.task('copyHtml', function() {
     return gulp.src('./app/scripts/modules/**/*.html')
-        .pipe(gulp.dest('dist/scripts/modules'))
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest('dist/scripts/modules'));
 });
 
 gulp.task('copyOther', function() {
