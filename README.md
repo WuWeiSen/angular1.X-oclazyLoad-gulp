@@ -5,11 +5,11 @@
 
 项目按模块开发，利用oclazyLoad按需加载每个模块的控制器，样式等。
 
-利用gulp 将公用的js,css打成一个app.js跟app.css
+利用gulp 将公用的js,css打成一个或多个app.js跟app.css
 
 一些资源直接用cdn链接,减少服务器压力（哪些采用cdn需要自行判断）
 
-js与css都用gulp md5化文件名
+js与css都用gulp md5化文件名,解决缓存
 
 ## Getting Started
 
