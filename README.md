@@ -1,8 +1,6 @@
 # APP
 开发一个脚手架 angular1.X + oclazyLoad + gulp
 
-设想：
-
 项目按模块开发，利用oclazyLoad按需加载每个模块的控制器，样式等。
 
 利用gulp 将公用的js,css打成一个或多个app.js跟app.css
