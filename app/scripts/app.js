@@ -1,13 +1,13 @@
 (function(angular) {
     'use strict';
     angular.module('opApp', [
-        'ngResource',
         'ngDialog',
         'oc.lazyLoad',
         'ui.router',
         'ui.bootstrap',
         'angularFileUpload',
-        'imageViewer'
+        'imageViewer',
+        'restangular'
     ]).run(function($rootScope, $state, $stateParams, ngDialog) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
@@ -26,7 +26,10 @@
         ngDialogProvider.setDefaults({
             closeByDocument: false
         });
-    }]).run(['uibPaginationConfig', function(paginationConfig) {
+    }]).config(['RestangularProvider', 'API_HOST', function(RestangularProvider, API_HOST) {
+            RestangularProvider.setBaseUrl(API_HOST + '/web/');
+        }
+    ]).run(['uibPaginationConfig', function(paginationConfig) {
         paginationConfig.firstText = '<<';
         paginationConfig.previousText = '<';
         paginationConfig.lastText = '>>';
@@ -39,11 +42,6 @@
         uibDatepickerPopupConfig.closeText = '关闭';
     }]).config(function($httpProvider) {
         $httpProvider.interceptors.push('CustomHTTPInterceptor');
-    }).factory('FULL_API_URL', function(API_HOST) {
-        var BASE_URL = '/web/';
-        return function(suffixUrl) {
-            return API_HOST + BASE_URL + suffixUrl;
-        };
     }).run(['fileUploaderOptions', function(fileUploaderOptions) {
         fileUploaderOptions.autoUpload = true;
         fileUploaderOptions.url = "/imgapi/image/upload"
