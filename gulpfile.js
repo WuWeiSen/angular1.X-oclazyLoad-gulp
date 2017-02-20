@@ -22,6 +22,9 @@ var sassCompilerConfig = {
     lineNumbers: true
 };
 
+// sass源路径
+var sassPath = ['app/scss/**/*.scss','app/scripts/modules/**/*.scss'];
+
 gulp.task('bower', () => {
     return gulp.src('./app/index.html')
         .pipe(wiredep({
@@ -90,8 +93,8 @@ gulp.task('changEnv', function() {
 });
 
 gulp.task('watch', () => {
-    gulp.watch(['app/scss/**/*.scss', 'app/scss/*.scss'], () => {
-        return sass('app/scss/**/*.scss', sassCompilerConfig)
+    gulp.watch(sassPath, () => {
+        return sass(sassPath, sassCompilerConfig)
             .on('error', sass.logError)
             .pipe(gulp.dest('./app/css'))
             .pipe($.connect.reload());
@@ -131,7 +134,7 @@ gulp.task('build:proxy', function() {
 /*build*/
 var cssRoad = ['./app/css/**/*.css', '!./app/css/common.css'];
 gulp.task('buildSass', function() {
-    return sass('app/scss/**/*.scss', sassCompilerConfig)
+    return sass(sassPath, sassCompilerConfig)
         .on('error', sass.logError)
         .pipe(gulp.dest('./app/css'))
 });
