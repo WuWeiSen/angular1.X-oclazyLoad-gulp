@@ -54,7 +54,7 @@ gulp.task('bower', () => {
 });
 
 gulp.task('serve', () => {
-    runSequence('changEnv', 'start:client', 'watch');
+    runSequence('changEnv', 'start:client', 'buildSass', 'watch');
 });
 
 gulp.task('start:client', ['start:proxy'], () => {
